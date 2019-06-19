@@ -12,7 +12,7 @@ class App extends Component {
   }
 
   onLogin = () => {
-
+    this.props.history.push('/auth/google');
   };
 
   render() {
