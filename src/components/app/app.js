@@ -4,7 +4,9 @@ import './app.css';
 
 class App extends Component {
   componentDidMount() {
-
+    this._passport = require('passport');
+    const auth = require('./../../auth/auth');
+    auth(this._passport);
   }
 
   onLogin = () => {
