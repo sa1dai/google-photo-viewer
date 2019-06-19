@@ -7,6 +7,8 @@ class App extends Component {
     this._passport = require('passport');
     const auth = require('./../../auth/auth');
     auth(this._passport);
+    this._passport.initialize();
+    this._passport.session();
   }
 
   onLogin = () => {
