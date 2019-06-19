@@ -1,15 +1,26 @@
-import React from 'react';
+import React, { Component } from 'react';
 
 import './app.css';
-import Header from "src/components/header";
 
-const App = () => {
-  return (
-    <main role="main" className="main">
-      <Header />
-      <h1>Hello World</h1>
-    </main>
-  );
-};
+class App extends Component {
+  componentDidMount() {
+
+  }
+
+  onLogin = () => {
+
+  };
+
+  render() {
+    return (
+      <button
+        className="btn btn-primary"
+        onClick={this.onLogin}
+      >
+        Login google photos
+      </button>
+    );
+  }
+}
 
 export default App;
