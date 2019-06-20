@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import config from 'src/auth/config';
+import config from 'src/config';
 
 import './app.css';
 
