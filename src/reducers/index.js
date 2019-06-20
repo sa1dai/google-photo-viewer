@@ -1,6 +1,8 @@
+import userReducer from "src/reducers/user-reducer";
+
 const reducer = (state, action) => {
   return {
-    auth: {}
+    user: userReducer(state, action)
   };
 };
 
