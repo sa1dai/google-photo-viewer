@@ -1,10 +1,10 @@
 export default class ActionTypes {
 
-  static get userLoggedIn() {
-    return 'USER_LOGGED_IN';
+  static get userSignIn() {
+    return 'USER_SIGN_IN';
   }
 
-  static get userLoggedOut() {
-    return 'USER_LOGGED_OUT';
+  static get userSignOut() {
+    return 'USER_SIGN_OUT';
   }
 }

@@ -1,19 +1,20 @@
 import ActionTypes from './action-types';
 
-const userLoggedIn = () => {
+const userSignIn = (user) => {
   return {
-    type: ActionTypes.userLoggedIn,
+    type: ActionTypes.userSignIn,
+    payload: user
   };
 };
 
-const userLoggedOut = () => {
+const userSignOut = () => {
   return {
-    type: ActionTypes.userLoggedOut,
+    type: ActionTypes.userSignOut,
   };
 };
 
 export {
-  userLoggedIn,
-  userLoggedOut,
+  userSignIn,
+  userSignOut,
   ActionTypes
 };
