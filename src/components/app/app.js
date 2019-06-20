@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import config from 'src/config';
+import authconfig from 'src/authconfig';
 
 import './app.css';
 
@@ -16,7 +16,7 @@ class App extends Component {
     window.gapi.load('auth2', function() {
       window.gapi.auth2
         .init({
-          client_id: config.oAuthClientID,
+          client_id: authconfig.oAuthClientID,
         })
         .then(_onInit, _onError)
     });
