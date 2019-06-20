@@ -1,49 +1,35 @@
-//import { ActionTypes } from '../actions';
+import ActionTypes from "src/actions/action-types";
 
 const userReducer = (state, action) => {
 
-  return {};
-
-  /*if (state === undefined) {
+  if (state === undefined) {
     return {
-      boardTitle: "",
-      serverIsProcessingRequest: false,
-      error: null
+      isLoggedIn: false,
+      name: null,
+      image: null
     };
   }
 
   switch (action.type) {
-    case ActionTypes.addBoardRequest:
+    case ActionTypes.userLoggedIn:
+      const { name, image } = action.payload;
+
       return {
-        boardTitle: "",
-        serverIsProcessingRequest: true,
-        error: null
+        isLoggedIn: true,
+        name: name,
+        image: image
       };
 
-    case ActionTypes.addBoardSuccess:
+    case ActionTypes.userLoggedOut:
       return {
-        boardTitle: "",
-        serverIsProcessingRequest: false,
-        error: null
-      };
-
-    case ActionTypes.addBoardFailure:
-      return {
-        boardTitle: "",
-        serverIsProcessingRequest: false,
-        error: action.payload
-      };
-
-    case ActionTypes.boardAddTitleChanged:
-      return {
-        boardTitle: action.payload,
-        serverIsProcessingRequest: false,
-        error: null
+        isLoggedIn: false,
+        name: null,
+        image: null
       };
 
     default:
-      return state.boardListAddForm;
-  }*/
+      return state.user;
+  }
 };
 
 export default userReducer;

@@ -14,5 +14,6 @@ const userLoggedOut = () => {
 
 export {
   userLoggedIn,
-  userLoggedOut
+  userLoggedOut,
+  ActionTypes
 };
