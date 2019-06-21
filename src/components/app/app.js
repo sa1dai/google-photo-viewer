@@ -20,7 +20,7 @@ class App extends Component {
     const { user } = this.props;
 
     return (
-      <main role="main" className="main d-flex">
+      <main role="main" className="main">
         {!user.isLoggedIn && <LoginPage />}
         {user.isLoggedIn && <UserPage user={user} />}
       </main>

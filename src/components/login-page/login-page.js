@@ -24,7 +24,9 @@ class LoginPage extends Component {
 
   render() {
     return (
-      <button onClick={this.signIn} className="btn btn-primary connect-button">Connect to Google Photos</button>
+      <div className="login-page d-flex">
+        <button onClick={this.signIn} className="btn btn-primary connect-button">Connect to Google Photos</button>
+      </div>
     )
   }
 }

@@ -20,10 +20,14 @@ class UserPage extends Component {
     const { user } = this.props;
 
     return (
-      <header>
-        <span>{user.name}</span>
-        <button onClick={this.signOut} className="btn btn-primary mx-auto">Disconnect</button>
-      </header>
+        <header className="header">
+          <span className="logo-text">Google Photos Viewer</span>
+          <div className="auth-block">
+            <img src={user.imageUrl} alt="user logo" className="user-img"/>
+            <span className="user-name">{user.name}</span>
+            <button onClick={this.signOut} className="btn btn-secondary mx-auto">Disconnect</button>
+          </div>
+        </header>
     )
   }
 }

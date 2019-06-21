@@ -6,19 +6,19 @@ const userReducer = (state, action) => {
     return {
       isLoggedIn: false,
       name: null,
-      image: null,
+      imageUrl: null,
       token: null
     };
   }
 
   switch (action.type) {
     case ActionTypes.userSignIn:
-      const { name, image, token } = action.payload;
+      const { name, imageUrl, token } = action.payload;
 
       return {
         isLoggedIn: true,
         name: name,
-        image: image,
+        imageUrl: imageUrl,
         token: token
       };
 
@@ -26,7 +26,7 @@ const userReducer = (state, action) => {
       return {
         isLoggedIn: false,
         name: null,
-        image: null,
+        imageUrl: null,
         token: null
       };
 
