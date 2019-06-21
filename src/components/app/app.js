@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
+import LoginPage from 'src/components/login-page'
+import UserPage from 'src/components/user-page';
 import oauth2Config from 'src/oauth2-config';
-import { userSignIn, userSignOut } from "src/actions";
 
 import './app.css';
 
@@ -16,36 +16,14 @@ class App extends Component {
     });
   }
 
-  signIn = () => {
-    const auth2 = window.gapi.auth2.getAuthInstance();
-
-    auth2.signIn().then(googleUser => {
-      const profile = googleUser.getBasicProfile();
-
-      this.props.userSignIn({
-        name: profile.getName(),
-        imageUrl: profile.getImageUrl(),
-        token: googleUser.getAuthResponse().id_token
-      });
-    })
-  };
-
-  signOut = () => {
-    const auth2 = window.gapi.auth2.getAuthInstance();
-
-    auth2.signOut().then(() => {
-      this.props.userSignOut();
-    });
-  };
-
   render() {
+    const { user } = this.props;
+
     return (
-      <div className="App">
-        <header className="App-header">
-          <button onClick={this.signIn}>Log in</button>
-          <button onClick={this.signOut}>Log out</button>
-        </header>
-      </div>
+      <main role="main" className="main d-flex">
+        {!user.isLoggedIn && <LoginPage />}
+        {user.isLoggedIn && <UserPage user={user} />}
+      </main>
     )
   }
 }
@@ -54,11 +32,4 @@ const mapStateToProps = ({ user }) => {
   return { user };
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({
-    userSignIn: userSignIn,
-    userSignOut: userSignOut
-  }, dispatch);
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps, null)(App);
