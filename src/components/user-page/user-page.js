@@ -6,6 +6,8 @@ import {fetchAlbums, userSignOut} from "src/actions";
 
 import './user-page.css';
 import withService from "src/hoc/with-service";
+import Spinner from "src/components/spinner";
+import AlbumList from "src/components/album-list";
 
 class UserPage extends Component {
 
@@ -24,9 +26,10 @@ class UserPage extends Component {
   };
 
   render() {
-    const { user } = this.props;
+    const { user, albumListAsync: { loading, albums } } = this.props;
 
     return (
+      <React.Fragment>
         <header className="header">
           <span className="logo-text">Google Photos Viewer</span>
           <div className="auth-block">
@@ -35,12 +38,15 @@ class UserPage extends Component {
             <button onClick={this.signOut} className="btn btn-secondary mx-auto">Disconnect</button>
           </div>
         </header>
+        { loading && <Spinner /> }
+        { albums.length !== 0 && <AlbumList albums={albums} /> }
+      </React.Fragment>
     )
   }
 }
 
-const mapStateToProps = ({ user }) => {
-  return { user };
+const mapStateToProps = ({ user, albumListAsync }) => {
+  return { user, albumListAsync };
 };
 
 const mapDispatchToProps = (dispatch, { service }) => {
