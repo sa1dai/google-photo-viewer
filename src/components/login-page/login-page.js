@@ -3,6 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import { userSignIn } from "src/actions";
+import oauth2Config from 'src/oauth2-config';
 
 import './login-page.css';
 
@@ -11,15 +12,16 @@ class LoginPage extends Component {
   signIn = () => {
     const auth2 = window.gapi.auth2.getAuthInstance();
 
-    auth2.signIn().then(googleUser => {
-      const profile = googleUser.getBasicProfile();
+    auth2.signIn({ scope: oauth2Config.scopes })
+      .then(googleUser => {
+        const profile = googleUser.getBasicProfile();
 
-      this.props.userSignIn({
-        name: profile.getName(),
-        imageUrl: profile.getImageUrl(),
-        token: googleUser.getAuthResponse().id_token
+        this.props.userSignIn({
+          name: profile.getName(),
+          imageUrl: profile.getImageUrl(),
+          token: googleUser.getAuthResponse().id_token
       });
-    })
+    });
   };
 
   render() {

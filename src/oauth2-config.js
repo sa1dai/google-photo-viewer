@@ -31,10 +31,7 @@ oauth2Config.port = 8080;
 
 // The scopes to request. The app requires the photoslibrary.readonly and
 // plus.me scopes.
-oauth2Config.scopes = [
-  'https://www.googleapis.com/auth/photoslibrary.readonly',
-  'profile',
-];
+oauth2Config.scopes = 'https://www.googleapis.com/auth/photoslibrary.readonly';
 
 // The number of photos to load for search requests.
 oauth2Config.photosToLoad = 150;
