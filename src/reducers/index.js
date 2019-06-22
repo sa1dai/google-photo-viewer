@@ -1,10 +1,10 @@
 import userReducer from "src/reducers/user-reducer";
-import albumsReducerAsync from "src/reducers/albums-reducer-async";
+import albumListReducerAsync from "src/reducers/album-list-reducer-async";
 
 const reducer = (state, action) => {
   return {
     user: userReducer(state, action),
-    albumsAsync: albumsReducerAsync(state, action)
+    albumListAsync: albumListReducerAsync(state, action)
   };
 };
 

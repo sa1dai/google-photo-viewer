@@ -1,6 +1,6 @@
 import { ActionTypes } from '../actions';
 
-const albumsReducerAsync = (state, action) => {
+const albumListReducerAsync = (state, action) => {
 
   if (state === undefined) {
     return {
@@ -33,8 +33,8 @@ const albumsReducerAsync = (state, action) => {
       };
 
     default:
-      return state.albumsAsync;
+      return state.albumListAsync;
   }
 };
 
-export default albumsReducerAsync;
+export default albumListReducerAsync;
