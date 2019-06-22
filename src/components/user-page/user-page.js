@@ -39,7 +39,7 @@ class UserPage extends Component {
           </div>
         </header>
         { loading && <Spinner /> }
-        { albums.length !== 0 && <AlbumList albums={albums} /> }
+        { !!albums.length && <AlbumList albums={albums} url={'#'} author={'maxim'} perPage={3} /> }
       </React.Fragment>
     )
   }

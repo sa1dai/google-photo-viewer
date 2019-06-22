@@ -36,7 +36,7 @@ const albumsError = (error) => {
 const fetchAlbums = (service) => (authToken) => (dispatch) => {
   dispatch(albumsRequested());
   service.getAlbums(authToken)
-    .then((data) => dispatch(albumsLoaded(data)))
+    .then(({ albums }) => dispatch(albumsLoaded(albums)))
     .catch((err) => dispatch(albumsError(err)));
 };
 
