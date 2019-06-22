@@ -1,15 +1,18 @@
 import React, { Component } from 'react';
-import { bindActionCreators } from 'redux';
+import {bindActionCreators, compose} from 'redux';
 import { connect } from 'react-redux';
 
-import { userSignOut } from "src/actions";
+import {fetchAlbums, userSignOut} from "src/actions";
 
 import './user-page.css';
+import withService from "src/hoc/with-service";
 
 class UserPage extends Component {
 
   componentDidMount() {
+    const { token } = this.props.user;
 
+    this.props.fetchAlbums(token);
   }
 
   signOut = () => {
@@ -40,10 +43,14 @@ const mapStateToProps = ({ user }) => {
   return { user };
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch, { service }) => {
   return bindActionCreators({
-    userSignOut: userSignOut
+    userSignOut: userSignOut,
+    fetchAlbums: fetchAlbums(service)
   }, dispatch);
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserPage);
+export default compose(
+  withService(),
+  connect(mapStateToProps, mapDispatchToProps)
+)(UserPage);

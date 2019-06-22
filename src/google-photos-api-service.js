@@ -22,7 +22,7 @@ export default class GooglePhotosApiService {
         const response = await fetch(`${this._apiBase}/v1/albums?access_token=${encodeURIComponent(authToken)}`);
         const result = await response.json();
 
-        console.log(`Response: ${result}`);
+        console.log(`Response`, result);
 
         if (result && result.albums) {
           console.log(`Number of albums received: ${result.albums.length}`);
