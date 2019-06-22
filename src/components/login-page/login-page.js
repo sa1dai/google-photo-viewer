@@ -19,7 +19,7 @@ class LoginPage extends Component {
         this.props.userSignIn({
           name: profile.getName(),
           imageUrl: profile.getImageUrl(),
-          token: googleUser.getAuthResponse().id_token
+          token: googleUser.getAuthResponse().access_token
       });
     });
   };

@@ -8,6 +8,10 @@ import './user-page.css';
 
 class UserPage extends Component {
 
+  componentDidMount() {
+
+  }
+
   signOut = () => {
     const auth2 = window.gapi.auth2.getAuthInstance();
 
