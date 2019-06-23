@@ -31,4 +31,20 @@ export default class ActionTypes {
   static get fetchAlbumFailure() {
     return 'FETCH_ALBUM_FAILURE';
   }
+
+  static get closeImgsViewer() {
+    return 'CLOSE_IMGS_VIEWER';
+  }
+
+  static get imgsViewerGotoPrev() {
+    return 'IMGS_VIEWER_GOTO_PREV';
+  }
+
+  static get imgsViewerGotoNext() {
+    return 'IMGS_VIEWER_GOTO_NEXT';
+  }
+
+  static get imgsViewerOnImgClick() {
+    return 'IMGS_VIEWER_ON_IMG_CLICK';
+  }
 }

@@ -5,7 +5,7 @@ import ImgsViewer from "react-images-viewer";
 import withService from "src/hoc/with-service";
 import {bindActionCreators, compose} from "redux";
 import {connect} from "react-redux";
-import {fetchAlbum} from "src/actions";
+import {closeImgsViewer, fetchAlbum, imgsViewerGotoNext, imgsViewerGotoPrev, imgsViewerOnImgClick} from "src/actions";
 
 const AlbumImg = ({ imgUrl }) => {
 
@@ -20,49 +20,27 @@ const AlbumImg = ({ imgUrl }) => {
 
 class Album extends Component {
 
-  componentWillMount() {
-    this.setState({
-      isOpen: false,
-      currImg: 0,
-    });
-  }
-
-  openImgsViewer = (index, event) => {
-    event.preventDefault();
-
-    this.setState({
-      currImg: index,
-      isOpen: true,
-    });
-  };
-
   closeImgsViewer = () => {
-    this.setState({
-      currImg: 0,
-      isOpen: false,
-    });
+    this.props.closeImgsViewer();
   };
 
   gotoPrev = () => {
-    this.setState({
-      currImg: this.state.currImg - 1
-    });
+    this.props.imgsViewerGotoPrev();
   };
 
   gotoNext = () => {
-    this.setState({
-      currImg: this.state.currImg + 1
-    });
+    this.props.imgsViewerGotoNext();
   };
 
   gotoImg = (index) => {
-    this.setState({
-      currImg: index
-    });
+    this.props.imgsViewerOnImgClick(index);
   };
 
   handleClickImg = () => {
-    if (this.state.currImg === this.props.imgs.length - 1) return;
+    const { imgsViewer: { currImg }, photos } = this.props;
+
+    if (currImg === photos.length - 1) return;
+
     this.gotoNext();
   };
 
@@ -72,13 +50,10 @@ class Album extends Component {
     const { user: { token }, album: { id }, fetchAlbum } = this.props;
 
     fetchAlbum(token, id);
-    //this.openImgsViewer(0, event);
   };
 
   render() {
-    console.log('render');
-
-    const { album } = this.props;
+    const { album, imgsViewer: { isOpen, currImg }, photos } = this.props;
 
     return (
       <div onClick={this.onAlbumClick} className="album">
@@ -87,9 +62,9 @@ class Album extends Component {
         <div>{album.mediaItemsCount}</div>
         <ImgsViewer
           backdropCloseable
-          currImg={this.state.currImg}
-          imgs={this.props.imgs}
-          isOpen={this.state.isOpen}
+          currImg={currImg}
+          imgs={photos}
+          isOpen={isOpen}
           onClickImg={this.handleClickImg}
           onClickNext={this.gotoNext}
           onClickPrev={this.gotoPrev}
@@ -107,13 +82,17 @@ class Album extends Component {
   }
 }
 
-const mapStateToProps = ({ user }) => {
-  return { user };
+const mapStateToProps = ({ user, imgsViewer, albumAsync: { photos } }) => {
+  return { user, imgsViewer, photos };
 };
 
 const mapDispatchToProps = (dispatch, { service }) => {
   return bindActionCreators({
-    fetchAlbum: fetchAlbum(service)
+    fetchAlbum: fetchAlbum(service),
+    closeImgsViewer: closeImgsViewer,
+    imgsViewerGotoNext: imgsViewerGotoNext,
+    imgsViewerGotoPrev: imgsViewerGotoPrev,
+    imgsViewerOnImgClick: imgsViewerOnImgClick,
   }, dispatch);
 };
 

@@ -53,6 +53,31 @@ const albumError = (error) => {
   };
 };
 
+const closeImgsViewer = () => {
+  return {
+    type: ActionTypes.closeImgsViewer
+  };
+};
+
+const imgsViewerGotoNext = () => {
+  return {
+    type: ActionTypes.imgsViewerGotoNext
+  };
+};
+
+const imgsViewerGotoPrev = () => {
+  return {
+    type: ActionTypes.imgsViewerGotoPrev
+  };
+};
+
+const imgsViewerOnImgClick = (imgIndex) => {
+  return {
+    type: ActionTypes.fetchAlbumFailure,
+    payload: imgIndex
+  };
+};
+
 const fetchAlbums = (service) => (authToken) => (dispatch) => {
   dispatch(albumsRequested());
   service.getAlbums(authToken)
@@ -64,8 +89,8 @@ const fetchAlbum = (service) => (authToken, albumId) => (dispatch) => {
   dispatch(albumRequested());
   service.loadFromAlbum(authToken, albumId)
     .then((data) => {
-      const photos = data.photos.map(({productUrl, filename}) =>
-        ({src: productUrl, caption: filename})
+      const photos = data.photos.map(({baseUrl, filename}) =>
+        ({src: baseUrl, caption: filename})
       );
 
       return dispatch(albumLoaded(photos));
@@ -78,5 +103,9 @@ export {
   userSignOut,
   fetchAlbums,
   fetchAlbum,
+  closeImgsViewer,
+  imgsViewerGotoNext,
+  imgsViewerGotoPrev,
+  imgsViewerOnImgClick,
   ActionTypes
 };
