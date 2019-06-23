@@ -3,24 +3,33 @@ import ReactPaginate from 'react-paginate';
 
 import './album-list.css';
 
-class AlbumList extends Component {
+const AlbumImg = ({ imgUrl }) => {
 
-  render() {
-    let albumNodes = this.props.data.map(album => {
-      return <div key={album.id}>{album.title}</div>;
-    });
+  const albumImgStyle = {
+    backgroundImage: `url(${imgUrl})`
+  };
 
+  return (
+    <div style={albumImgStyle} className="album-img"/>
+  );
+};
+
+const AlbumList = ({ data }) => {
+
+  let albumNodes = data.map(album => {
     return (
-        <ul>{albumNodes}</ul>
-    );
-
-    /*return (
-      <div id="project-comments" className="commentList">
-        <ul>{albumNodes}</ul>
+      <div key={album.id} className="album">
+        <AlbumImg imgUrl={album.coverPhotoBaseUrl} />
+        <div>{album.title}</div>
+        <div>{album.mediaItemsCount}</div>
       </div>
-    );*/
-  }
-}
+    )
+  });
+
+  return (
+      <ul>{albumNodes}</ul>
+  );
+};
 
 class AlbumListContainer extends Component {
 
