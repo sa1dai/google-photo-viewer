@@ -26,7 +26,7 @@ class UserPage extends Component {
   };
 
   render() {
-    const { user, albumListAsync: { loading, albums } } = this.props;
+    const { user, albumListAsync: { loading: albumsLoading, albums }, albumAsync: { loading: albumLoading } } = this.props;
 
     return (
       <React.Fragment>
@@ -38,15 +38,15 @@ class UserPage extends Component {
             <button onClick={this.signOut} className="btn btn-secondary mx-auto">Disconnect</button>
           </div>
         </header>
-        { loading && <Spinner /> }
-        { !!albums.length && <AlbumList albums={albums} url={'#'} author={'maxim'} perPage={3} /> }
+        { (albumsLoading || albumLoading) && <Spinner /> }
+        { !(albumsLoading || albumLoading) &&  <AlbumList albums={albums} url={'#'} author={'maxim'} perPage={3} /> }
       </React.Fragment>
     )
   }
 }
 
-const mapStateToProps = ({ user, albumListAsync }) => {
-  return { user, albumListAsync };
+const mapStateToProps = ({ user, albumListAsync, albumAsync }) => {
+  return { user, albumListAsync, albumAsync };
 };
 
 const mapDispatchToProps = (dispatch, { service }) => {

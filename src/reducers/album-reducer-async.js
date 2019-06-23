@@ -5,7 +5,7 @@ const albumReducerAsync = (state, action) => {
   if (state === undefined) {
     return {
       photos: [],
-      loading: true,
+      loading: false,
       error: null
     };
   }
