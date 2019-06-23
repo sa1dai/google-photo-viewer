@@ -58,8 +58,8 @@ class Album extends Component {
     return (
       <div onClick={this.onAlbumClick} className="album">
         <AlbumImg imgUrl={album.coverPhotoBaseUrl} />
-        <div>{album.title}</div>
-        <div>{album.mediaItemsCount}</div>
+        <div><strong>{album.title}</strong></div>
+        <div>Elements: {album.mediaItemsCount}</div>
         <ImgsViewer
           backdropCloseable
           currImg={currImg}

@@ -13,7 +13,9 @@ const AlbumList = ({ data }) => {
   });
 
   return (
-      <ul>{albumNodes}</ul>
+    <div className="album-list">
+      {albumNodes}
+    </div>
   );
 };
 
@@ -48,7 +50,7 @@ class AlbumListContainer extends Component {
 
   render() {
     return (
-      <div>
+      <React.Fragment>
         <AlbumList data={this.state.data} />
         <ReactPaginate
           previousLabel={'previous'}
@@ -59,7 +61,7 @@ class AlbumListContainer extends Component {
           pageRangeDisplayed={5}
           onPageChange={this.handlePageClick}
         />
-      </div>
+      </React.Fragment>
     );
   }
 }

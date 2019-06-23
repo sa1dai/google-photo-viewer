@@ -10,3 +10,12 @@
     padding-bottom: 100%;
     border-radius: 8px;
 }
+
+.album-list {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-grow: 1;
+    flex-wrap: wrap;
+    margin-top: 10px;
+}
