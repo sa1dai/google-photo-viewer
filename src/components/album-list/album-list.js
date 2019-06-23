@@ -53,13 +53,24 @@ class AlbumListContainer extends Component {
       <React.Fragment>
         <AlbumList data={this.state.data} />
         <ReactPaginate
-          previousLabel={'previous'}
-          nextLabel={'next'}
+          previousLabel={'«'}
+          nextLabel={'»'}
           breakLabel={'...'}
+          breakClassName={'page-item'}
+          breakLinkClassName={'page-link'}
           pageCount={this.state.pageCount}
-          marginPagesDisplayed={2}
-          pageRangeDisplayed={5}
+          marginPagesDisplayed={3}
+          pageRangeDisplayed={3}
           onPageChange={this.handlePageClick}
+          containerClassName={'pagination'}
+          pageClassName={'page-item'}
+          pageLinkClassName={'page-link'}
+          previousClassName={'page-item'}
+          previousLinkClassName={'page-link'}
+          nextClassName={'page-item'}
+          nextLinkClassName={'page-link'}
+          subContainerClassName={'pages pagination'}
+          activeClassName={'active'}
         />
       </React.Fragment>
     );
