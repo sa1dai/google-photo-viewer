@@ -8,7 +8,7 @@ const AlbumList = ({ data }) => {
 
   let albumNodes = data.map(album => {
     return (
-      <Album album={album} />
+      <Album key={album.id} album={album} />
     )
   });
 

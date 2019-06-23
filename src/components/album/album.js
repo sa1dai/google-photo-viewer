@@ -14,11 +14,16 @@ const AlbumImg = ({ imgUrl }) => {
 };
 
 class Album extends Component {
+
+  onAlbumClick = () => {
+
+  };
+
   render() {
     const { album } = this.props;
 
     return (
-      <div key={album.id} className="album">
+      <div onClick={this.onAlbumClick} className="album">
         <AlbumImg imgUrl={album.coverPhotoBaseUrl} />
         <div>{album.title}</div>
         <div>{album.mediaItemsCount}</div>
