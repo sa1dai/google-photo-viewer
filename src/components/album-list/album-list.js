@@ -2,27 +2,13 @@ import React, { Component } from 'react';
 import ReactPaginate from 'react-paginate';
 
 import './album-list.css';
-
-const AlbumImg = ({ imgUrl }) => {
-
-  const albumImgStyle = {
-    backgroundImage: `url(${imgUrl})`
-  };
-
-  return (
-    <div style={albumImgStyle} className="album-img"/>
-  );
-};
+import Album from "src/components/album";
 
 const AlbumList = ({ data }) => {
 
   let albumNodes = data.map(album => {
     return (
-      <div key={album.id} className="album">
-        <AlbumImg imgUrl={album.coverPhotoBaseUrl} />
-        <div>{album.title}</div>
-        <div>{album.mediaItemsCount}</div>
-      </div>
+      <Album album={album} />
     )
   });
 
