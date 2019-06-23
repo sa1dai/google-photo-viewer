@@ -19,4 +19,16 @@ export default class ActionTypes {
   static get fetchAlbumsFailure() {
     return 'FETCH_ALBUMS_FAILURE';
   }
+
+  static get fetchAlbumRequest() {
+    return 'FETCH_ALBUM_REQUEST';
+  }
+
+  static get fetchAlbumSuccess() {
+    return 'FETCH_ALBUM_SUCCESS';
+  }
+
+  static get fetchAlbumFailure() {
+    return 'FETCH_ALBUM_FAILURE';
+  }
 }

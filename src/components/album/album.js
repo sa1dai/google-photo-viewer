@@ -3,8 +3,9 @@ import React, { Component } from 'react';
 import './album.css';
 import ImgsViewer from "react-images-viewer";
 import withService from "src/hoc/with-service";
-import {compose} from "redux";
+import {bindActionCreators, compose} from "redux";
 import {connect} from "react-redux";
+import {fetchAlbum} from "src/actions";
 
 const AlbumImg = ({ imgUrl }) => {
 
@@ -20,9 +21,6 @@ const AlbumImg = ({ imgUrl }) => {
 class Album extends Component {
 
   componentWillMount() {
-    this.props.service.loadFromAlbum(this.props.user.token, this.props.album.id)
-      .then(data => console.log('response', data));
-
     this.setState({
       isOpen: false,
       currImg: 0,
@@ -69,7 +67,12 @@ class Album extends Component {
   };
 
   onAlbumClick = (event) => {
-    this.openImgsViewer(0, event);
+    event.preventDefault();
+
+    const { user: { token }, album: { id }, fetchAlbum } = this.props;
+
+    fetchAlbum(token, id);
+    //this.openImgsViewer(0, event);
   };
 
   render() {
@@ -108,7 +111,13 @@ const mapStateToProps = ({ user }) => {
   return { user };
 };
 
+const mapDispatchToProps = (dispatch, { service }) => {
+  return bindActionCreators({
+    fetchAlbum: fetchAlbum(service)
+  }, dispatch);
+};
+
 export default compose(
   withService(),
-  connect(mapStateToProps, null)
+  connect(mapStateToProps, mapDispatchToProps)
 )(Album);

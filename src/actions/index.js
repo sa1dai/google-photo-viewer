@@ -33,6 +33,26 @@ const albumsError = (error) => {
   };
 };
 
+const albumRequested = () => {
+  return {
+    type: ActionTypes.fetchAlbumRequest
+  };
+};
+
+const albumLoaded = (photos) => {
+  return {
+    type: ActionTypes.fetchAlbumSuccess,
+    payload: photos
+  };
+};
+
+const albumError = (error) => {
+  return {
+    type: ActionTypes.fetchAlbumFailure,
+    payload: error
+  };
+};
+
 const fetchAlbums = (service) => (authToken) => (dispatch) => {
   dispatch(albumsRequested());
   service.getAlbums(authToken)
@@ -40,9 +60,23 @@ const fetchAlbums = (service) => (authToken) => (dispatch) => {
     .catch((err) => dispatch(albumsError(err)));
 };
 
+const fetchAlbum = (service) => (authToken, albumId) => (dispatch) => {
+  dispatch(albumRequested());
+  service.loadFromAlbum(authToken, albumId)
+    .then((data) => {
+      const photos = data.photos.map(({productUrl, filename}) =>
+        ({src: productUrl, caption: filename})
+      );
+
+      return dispatch(albumLoaded(photos));
+    })
+    .catch((err) => dispatch(albumError(err)));
+};
+
 export {
   userSignIn,
   userSignOut,
   fetchAlbums,
+  fetchAlbum,
   ActionTypes
 };
