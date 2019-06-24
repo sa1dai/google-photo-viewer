@@ -35,4 +35,7 @@ config.googleApiAlbumPageSize = 50;
 // The API end point to use. Do not change.
 config.googleApiEndpoint = 'https://photoslibrary.googleapis.com';
 
+// Максимальное количество альбомов, отображающихся на странице пользователя
+config.paginationAlbumsPerPage = 3;
+
 module.exports = config;

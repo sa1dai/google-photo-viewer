@@ -9,6 +9,7 @@ import withService from "src/hoc/with-service";
 import Spinner from "src/components/spinner";
 import AlbumList from "src/components/album-list";
 import AlbumListFilter from "src/components/album-list-filter/album-list-filter";
+import config from 'src/config';
 
 class UserPage extends Component {
 
@@ -57,7 +58,8 @@ class UserPage extends Component {
           <AlbumListFilter />
         </header>
         { (albumsLoading || albumLoading) && <Spinner /> }
-        { !(albumsLoading || albumLoading) &&  <AlbumList albums={filteredAlbums} url={'#'} author={'maxim'} perPage={3} /> }
+        { !(albumsLoading || albumLoading) &&
+          <AlbumList albums={filteredAlbums} url={'#'} author={'maxim'} perPage={config.paginationAlbumsPerPage} /> }
       </React.Fragment>
     )
   }
