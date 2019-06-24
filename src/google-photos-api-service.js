@@ -10,17 +10,23 @@ export default class GooglePhotosApiService {
   async getAlbums(authToken) {
     let albums = [];
     let error = null;
-    //todo передать в fetch и проверить
-    let parameters = {pageSize: oauth2Config.albumPageSize};
+    let parameters = {
+      access_token: authToken,
+      pageSize: oauth2Config.albumPageSize
+    };
 
     try {
       // Loop while there is a nextpageToken property in the response until all
       // albums have been listed.
       do {
         console.log(`Loading albums. Received so far: ${albums.length}`);
+
+        const url = new URL(`${this._apiBase}/v1/albums`);
+        Object.keys(parameters).forEach(key => url.searchParams.append(key, parameters[key]));
+
         // Make a GET request to load the albums with optional parameters (the
         // pageToken if set).
-        const response = await fetch(`${this._apiBase}/v1/albums?access_token=${encodeURIComponent(authToken)}`);
+        const response = await fetch(url);
         const result = await response.json();
 
         console.log(`Response`, result);
