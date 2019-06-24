@@ -19,8 +19,7 @@ const config = {};
 // The OAuth client ID from the Google Developers console.
 config.oauthClientID = 'ADD YOUR CLIENT ID';
 
-// The scopes to request. The app requires the photoslibrary.readonly and
-// plus.me scopes.
+// The scopes to request. The app requires the photoslibrary.readonly.
 config.oauthScopes = 'https://www.googleapis.com/auth/photoslibrary.readonly';
 
 // The number of photos to load for search requests.
