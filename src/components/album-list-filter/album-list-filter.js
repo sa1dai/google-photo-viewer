@@ -16,7 +16,7 @@ class AlbumListFilter extends Component {
 
     return (
       <React.Fragment>
-        <h3>Filter albums</h3>
+        <div className="albums-filter-text">Filter albums</div>
         <input type="text"
                className="form-control search-input albums-filter"
                placeholder="type to filter"

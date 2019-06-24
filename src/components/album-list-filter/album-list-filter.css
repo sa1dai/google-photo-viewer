@@ -1,3 +1,8 @@
 .albums-filter {
     display: inline;
+    width: 250px;
+}
+
+.albums-filter-text {
+    font-size: 1.2rem;
 }
