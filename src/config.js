@@ -14,35 +14,25 @@
 
 // This file contains the configuration options for this sample app.
 
-const oauth2Config = {};
+const config = {};
 
 // The OAuth client ID from the Google Developers console.
-oauth2Config.clientID = 'ADD YOUR CLIENT ID';
-
-// The OAuth client secret from the Google Developers console.
-oauth2Config.oAuthclientSecret = 'ADD YOUR CLIENT SECRET';
-
-// The callback to use for OAuth requests. This is the URL where the app is
-// running. For testing and running it locally, use 127.0.0.1.
-oauth2Config.oAuthCallbackUrl = 'http://127.0.0.1:8080/auth/google/callback';
-
-// The port where the app should listen for requests.
-oauth2Config.port = 8080;
+config.oauthClientID = 'ADD YOUR CLIENT ID';
 
 // The scopes to request. The app requires the photoslibrary.readonly and
 // plus.me scopes.
-oauth2Config.scopes = 'https://www.googleapis.com/auth/photoslibrary.readonly';
+config.oauthScopes = 'https://www.googleapis.com/auth/photoslibrary.readonly';
 
 // The number of photos to load for search requests.
-oauth2Config.photosToLoad = 150;
+config.googleApiPhotosToLoad = 150;
 
 // The page size to use for search requests. 100 is reccommended.
-oauth2Config.searchPageSize = 100;
+config.googleApiSearchPageSize = 100;
 
 // The page size to use for the listing albums request. 50 is reccommended.
-oauth2Config.albumPageSize = 50;
+config.googleApiAlbumPageSize = 50;
 
 // The API end point to use. Do not change.
-oauth2Config.apiEndpoint = 'https://photoslibrary.googleapis.com';
+config.googleApiEndpoint = 'https://photoslibrary.googleapis.com';
 
-module.exports = oauth2Config;
+module.exports = config;

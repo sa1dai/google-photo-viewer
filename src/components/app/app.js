@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import LoginPage from 'src/components/login-page'
 import UserPage from 'src/components/user-page';
-import oauth2Config from 'src/oauth2-config';
+import config from 'src/config';
 
 import './app.css';
 
@@ -11,7 +11,7 @@ class App extends Component {
   componentDidMount() {
     window.gapi.load('auth2', function() {
       window.gapi.auth2.init({
-        client_id: oauth2Config.clientID,
+        client_id: config.oauthClientID,
       })
     });
   }

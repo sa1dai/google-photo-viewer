@@ -1,9 +1,9 @@
-import oauth2Config from 'src/oauth2-config';
+import config from 'src/config';
 
 // Использован код из файла https://github.com/googlesamples/google-photos/blob/master/REST/PhotoFrame/app.js
 export default class GooglePhotosApiService {
 
-  _apiBase = oauth2Config.apiEndpoint;
+  _apiBase = config.googleApiEndpoint;
 
   // Returns a list of all albums owner by the logged in user from the Library
   // API.
@@ -12,7 +12,7 @@ export default class GooglePhotosApiService {
     let error = null;
     let parameters = {
       access_token: authToken,
-      pageSize: oauth2Config.albumPageSize
+      pageSize: config.googleApiAlbumPageSize
     };
 
     try {
@@ -84,7 +84,7 @@ export default class GooglePhotosApiService {
     let photos = [];
     let error = null;
 
-    parameters.pageSize = oauth2Config.searchPageSize;
+    parameters.pageSize = config.googleApiSearchPageSize;
 
     try {
       // Loop while the number of photos threshold has not been met yet
@@ -131,7 +131,7 @@ export default class GooglePhotosApiService {
 
         // Loop until the required number of photos has been loaded or until there
         // are no more photos, ie. there is no pageToken.
-      } while (photos.length < oauth2Config.photosToLoad &&
+      } while (photos.length < config.googleApiPhotosToLoad &&
       parameters.pageToken != null);
 
     } catch (err) {
