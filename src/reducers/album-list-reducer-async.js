@@ -6,7 +6,8 @@ const albumListReducerAsync = (state, action) => {
     return {
       albums: [],
       loading: false,
-      error: null
+      error: null,
+      filterTerm: ''
     };
   }
 
@@ -15,21 +16,32 @@ const albumListReducerAsync = (state, action) => {
       return {
         albums: [],
         loading: true,
-        error: null
+        error: null,
+        filterTerm: ''
       };
 
     case ActionTypes.fetchAlbumsSuccess:
       return {
         albums: action.payload,
         loading: false,
-        error: null
+        error: null,
+        filterTerm: ''
       };
 
     case ActionTypes.fetchAlbumsFailure:
       return {
         albums: [],
         loading: false,
-        error: action.payload
+        error: action.payload,
+        filterTerm: ''
+      };
+
+    case ActionTypes.filterAlbums:
+      return {
+        albums: state.albumListAsync.albums,
+        loading: false,
+        error: null,
+        filterTerm: action.payload
       };
 
     default:

@@ -47,4 +47,8 @@ export default class ActionTypes {
   static get imgsViewerOnImgClick() {
     return 'IMGS_VIEWER_ON_IMG_CLICK';
   }
+
+  static get filterAlbums() {
+    return 'FILTER_ALBUMS';
+  }
 }

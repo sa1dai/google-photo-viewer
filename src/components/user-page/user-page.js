@@ -8,6 +8,7 @@ import './user-page.css';
 import withService from "src/hoc/with-service";
 import Spinner from "src/components/spinner";
 import AlbumList from "src/components/album-list";
+import AlbumListFilter from "src/components/album-list-filter/album-list-filter";
 
 class UserPage extends Component {
 
@@ -25,8 +26,24 @@ class UserPage extends Component {
     });
   };
 
+  filterAlbums = (albums, filterTerm) => {
+    return albums.filter(album => {
+      const albumTitleLowerCase = album.title.toLowerCase();
+      const filerTermLowerCase = filterTerm.toLowerCase();
+
+      return albumTitleLowerCase.includes(filerTermLowerCase);
+    });
+  };
+
   render() {
-    const { user, albumListAsync: { loading: albumsLoading, albums }, albumAsync: { loading: albumLoading } } = this.props;
+    const {
+      user,
+      albumListAsync: { loading: albumsLoading, albums, filterTerm },
+      albumAsync: { loading: albumLoading }
+    } = this.props;
+
+    const filteredAlbums = this.filterAlbums(albums, filterTerm);
+
 
     return (
       <React.Fragment>
@@ -37,9 +54,10 @@ class UserPage extends Component {
             <span className="user-name">{user.name}</span>
             <button onClick={this.signOut} className="btn btn-secondary mx-auto">Disconnect</button>
           </div>
+          <AlbumListFilter />
         </header>
         { (albumsLoading || albumLoading) && <Spinner /> }
-        { !(albumsLoading || albumLoading) &&  <AlbumList albums={albums} url={'#'} author={'maxim'} perPage={3} /> }
+        { !(albumsLoading || albumLoading) &&  <AlbumList albums={filteredAlbums} url={'#'} author={'maxim'} perPage={3} /> }
       </React.Fragment>
     )
   }

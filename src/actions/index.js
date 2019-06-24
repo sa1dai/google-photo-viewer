@@ -78,6 +78,13 @@ const imgsViewerOnImgClick = (imgIndex) => {
   };
 };
 
+const filterAlbums = (filterTerm) => {
+  return {
+    type: ActionTypes.filterAlbums,
+    payload: filterTerm
+  };
+};
+
 const fetchAlbums = (service) => (authToken) => (dispatch) => {
   dispatch(albumsRequested());
   service.getAlbums(authToken)
@@ -107,5 +114,6 @@ export {
   imgsViewerGotoNext,
   imgsViewerGotoPrev,
   imgsViewerOnImgClick,
+  filterAlbums,
   ActionTypes
 };

@@ -25,16 +25,30 @@ class AlbumListContainer extends Component {
     super(props);
 
     this.state = {
-      data: [],
       offset: 0,
-      pageCount: Math.ceil(props.albums.length / props.perPage)
     };
   }
 
-  componentDidMount() {
+  /*componentDidMount() {
     this.setState({
       data: this.props.albums.slice(this.state.offset, this.state.offset + this.props.perPage)
     });
+  }*/
+
+  componentDidUpdate() {
+    /*this.setState({
+      data: [],
+      offset: 0,
+      pageCount: Math.ceil(this.props.albums.length / this.props.perPage)
+    });*/
+    /*this.setState({
+          offset: 0,
+          pageCount: Math.ceil(this.props.albums.length / this.props.perPage)
+        }, () => {
+        this.setState({
+          data: this.props.albums.slice(this.state.offset, this.state.offset + this.props.perPage)
+        });
+    });*/
   }
 
   handlePageClick = data => {
@@ -49,16 +63,19 @@ class AlbumListContainer extends Component {
   };
 
   render() {
+    const pageCount = Math.ceil(this.props.albums.length / this.props.perPage);
+    const data = this.props.albums.slice(this.state.offset, this.state.offset + this.props.perPage)
+
     return (
       <React.Fragment>
-        <AlbumList data={this.state.data} />
+        <AlbumList data={data} />
         <ReactPaginate
           previousLabel={'«'}
           nextLabel={'»'}
           breakLabel={'...'}
           breakClassName={'page-item'}
           breakLinkClassName={'page-link'}
-          pageCount={this.state.pageCount}
+          pageCount={pageCount}
           marginPagesDisplayed={3}
           pageRangeDisplayed={3}
           onPageChange={this.handlePageClick}
