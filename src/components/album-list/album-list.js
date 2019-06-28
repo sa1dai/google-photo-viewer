@@ -21,61 +21,41 @@ const AlbumList = ({ data }) => {
 
 class AlbumListContainer extends Component {
 
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      offset: 0,
-    };
-  }
-
-  /*componentDidMount() {
-    this.setState({
-      data: this.props.albums.slice(this.state.offset, this.state.offset + this.props.perPage)
-    });
-  }*/
-
-  componentDidUpdate() {
-    /*this.setState({
-      data: [],
-      offset: 0,
-      pageCount: Math.ceil(this.props.albums.length / this.props.perPage)
-    });*/
-    /*this.setState({
-          offset: 0,
-          pageCount: Math.ceil(this.props.albums.length / this.props.perPage)
-        }, () => {
-        this.setState({
-          data: this.props.albums.slice(this.state.offset, this.state.offset + this.props.perPage)
-        });
-    });*/
-  }
+  state = {
+    offset: 0,
+  };
 
   handlePageClick = data => {
     let selected = data.selected;
     let offset = Math.ceil(selected * this.props.perPage);
 
-    this.setState({ offset: offset }, () => {
-      this.setState({
-        data: this.props.albums.slice(this.state.offset, this.state.offset + this.props.perPage)
-      });
-    });
+    this.setState({ offset: offset });
+  };
+
+  getPageCount = () => {
+    const { albums: { length }, perPage } = this.props;
+
+    return Math.ceil(length / perPage);
+  };
+
+  getData = () => {
+    const { albums, perPage } = this.props;
+    const { offset } = this.state;
+
+    return albums.slice(offset, offset + perPage);
   };
 
   render() {
-    const pageCount = Math.ceil(this.props.albums.length / this.props.perPage);
-    const data = this.props.albums.slice(this.state.offset, this.state.offset + this.props.perPage)
-
     return (
       <React.Fragment>
-        <AlbumList data={data} />
+        <AlbumList data={this.getData()} />
         <ReactPaginate
           previousLabel={'«'}
           nextLabel={'»'}
           breakLabel={'...'}
           breakClassName={'page-item'}
           breakLinkClassName={'page-link'}
-          pageCount={pageCount}
+          pageCount={this.getPageCount()}
           marginPagesDisplayed={3}
           pageRangeDisplayed={3}
           onPageChange={this.handlePageClick}
